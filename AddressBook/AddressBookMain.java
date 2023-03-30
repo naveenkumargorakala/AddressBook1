@@ -24,7 +24,10 @@ public class AddressBookMain {
                     addresBook1.displayContact();
                 break;
                 case 4:
-                    System.out.println("exit AddressBook");
+                    System.out.println("delete contact in AddressBook");
+                    System.out.println("enter firstName");
+                    String name = object.next();
+                    addresBook1.delete(name);
                 break;
             }
         }

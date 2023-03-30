@@ -61,7 +61,7 @@ public class AddresBook {
             case "1":
                 System.out.println("changed first name: ");
                 FirstName = in.next();
-                person.setFirstName(FirstName);
+                person.getFirstName();
                 System.out.println("FirstName updated");
                 break;
             case "2":
@@ -110,6 +110,12 @@ public class AddresBook {
                 list1.add(person);
                 System.out.println("Enter only 1 to 8 numbers");
         }
+    }
+    public void delete(String name){
+        if(name== person.getFirstName()){
+            list1.remove(person);
+        }
+
     }
 
 }
