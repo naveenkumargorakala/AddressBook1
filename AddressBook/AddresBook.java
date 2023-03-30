@@ -7,7 +7,7 @@ public class AddresBook {
     public int contactId;
     List<Person> list1 = new ArrayList<>();
     Person person = new Person();
-    public void Details() {
+    public void addDetails() {
         String FirstName, LastName, Gmail, Address, City, State, Zipcode, PhoneNumber;
         Random generatingId = new Random();//Using random function to generate contact id
         Scanner in = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class AddresBook {
             return -1;
         }
 
-    public void DisplayContact1(){
+    public void displayContact(){
         System.out.println("FirstName: "+person.getFirstName() +"\n LastName: "+person.getLastName() +"\n Gmail: "+person.getGmail()+"\n Address: "+person.getAddress() +"\n City: "+person.getCity() +"\n State: "+person.getState()+"\n ZipCode: "+person.getZipcode()+"\n PhoneNumber: "+person.getPhoneNumber());
     }
     public void edit() {
@@ -62,59 +62,54 @@ public class AddresBook {
                 System.out.println("changed first name: ");
                 FirstName = in.next();
                 person.setFirstName(FirstName);
+                System.out.println("FirstName updated");
                 break;
             case "2":
                 System.out.println("lastname to change: ");
                 LastName = in.next();
                 person.setLastName(LastName);
+                System.out.println("LastName updated");
                 break;
             case "3":
                 System.out.println("gmail to change: ");
                 Gmail = in.next();
                 person.setGmail(Gmail);
+                System.out.println("Gmail updated");
                 break;
             case "4":
                 System.out.println("Address to change: ");
                 Address = in.next();
                 person.setAddress(Address);
+                System.out.println("Address updated");
                 break;
             case "5":
                 System.out.println("City to change: ");
                 City = in.next();
                 person.setCity(City);
+                System.out.println("City updated");
                 break;
             case "6":
                 System.out.println("State to change: ");
                 State = in.next();
                 person.setState(State);
+                System.out.println("State updated");
                 break;
             case "7":
                 System.out.println("Zipcode to change: ");
                 Zipcode = in.next();
                 person.setZipcode(Zipcode);
+                System.out.println("Zipcode updated");
                 break;
             case "8":
                 System.out.println("Phone number to change: ");
                 PhoneNumber = in.next();
                 person.setPhoneNumber(PhoneNumber);
+                System.out.println("PhoneNUmber updated");
                 break;
             default:
                 list1.add(person);
                 System.out.println("Enter only 1 to 8 numbers");
         }
-    }
-
-    public static void main(String[] args) {
-        AddresBook addresBook= new AddresBook();
-        addresBook.DisplayContact1();
-        System.out.println("1");
-        addresBook.Details();
-        System.out.println("2");
-        addresBook.DisplayContact1();
-        System.out.println("3");
-        addresBook.edit();
-        System.out.println("4");
-        addresBook.DisplayContact1();
     }
 
 }
