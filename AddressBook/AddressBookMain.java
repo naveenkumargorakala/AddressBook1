@@ -7,7 +7,7 @@ public class AddressBookMain {
     public static void main(String args[]) {
         AddresBook addresBook1=new AddresBook();
         AddressBookMain main = new AddressBookMain();
-        System.out.println("1.Add contact \n 2.edit contact \n 3.show contact \n 4.exit");
+        System.out.println("1.Add contact \n 2.edit contact \n 3.show contact \n 4.delete contact \n 5.exit");
         {
             System.out.println("Enter your choice:  ");
             int choice = object.nextInt();
@@ -28,6 +28,9 @@ public class AddressBookMain {
                     System.out.println("enter firstName");
                     String name = object.next();
                     addresBook1.delete(name);
+                break;
+                case 5:
+                    System.out.println("exit addressbook");
                 break;
             }
         }
