@@ -91,7 +91,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "AddressBook{" +
+        return "Contact{" +
                 "FirstName='" + FirstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 ", Gmail='" + Gmail + '\'' +
