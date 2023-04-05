@@ -1,49 +1,59 @@
-//package com.bridgelabz.AddressBook;
-//import java.util.Scanner;
-//public class AddressBookMain {
-//        Scanner object = new Scanner(System.in);
-//        Person contacts = new Person();//created object of class Contacts
-//        public static void main(String args[]) {
-//            AddressBookMain main = new AddressBookMain();//created object of Main class to call non-static method  of this class
-//            main.initiate();
-//        }
-//        private void initiate(){
-//            System.out.println("Press 1 for add contact");
-//            System.out.println("Press 2 to display contact");
-//            System.out.println("Press 3 to edit contact");
-//            System.out.println("Press 4 to delete contact");
-//            System.out.println("Press 5 to exit ");
-//            int input = object.nextInt();
-//            switch (input){
-//                case 1:
-//                    contacts.addContact();
-//                    System.out.println("CONTACT ADDED !");
-//                    initiate();
-//                    break;
-//                case 2:
-//                    System.out.println("AddressBook has following contacts");
-//                    contacts.displayContact();
-//                    initiate();
-//                    break;
-//                case 3:
-//                    System.out.println("Enter name for editing the contact");
-//                    String nameForEditContactDetails = new Scanner(System.in).nextLine();
-//                    contacts.editContact(nameForEditContactDetails);
-//                    System.out.println("Contact edited successfully");
-//                    initiate();
-//                case 4:
-//                    System.out.println("Enter Name for Delete Contact");
-//                    String contactNameForDelete = (new Scanner(System.in)).nextLine();
-//                    contacts.deleteContact(contactNameForDelete);
-//                    System.out.println("Deleted succesfully");
-//                    initiate();
-//                    break;
-//                case 5:
-//                    System.out.println("Exit successfully");
-//                    break;
-//                default:
-//                    System.out.println("Invalid Input");
-//            }
-//        }
-//    }
-//}
+package com.bridgelabz.AddressBook;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+public class AddressBookMain {
+    ContactBook contactBook = new ContactBook();
+
+    public void AddressBook() {
+        Scanner object = new Scanner(System.in);
+        System.out.println("1.Add contact \n 2.edit contact \n 3.show contact \n 4.delete contact \n 5.add multiple contacts \n 6.exit"  );
+        {
+            System.out.println("Enter your choice:  ");
+            int choice = object.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Add contact details...");
+
+                    contactBook.addDetails();
+//                    Map<String, person> addressBookMap = new HashMap<>();
+                    AddressBook();
+                    break;
+                case 2:
+                    System.out.println("Edit contact details...");
+                    contactBook.edit();
+                    AddressBook();
+                    break;
+                case 3:
+                    contactBook.displayContact();
+                    AddressBook();
+                    break;
+                case 4:
+                    System.out.println("delete contact in AddressBook");
+                    System.out.println("enter firstName");
+                    String name = object.next();
+                    contactBook.delete(name);
+                    AddressBook();
+                    break;
+                case 5:
+                    contactBook.addMultipleContacts();
+                    AddressBook();
+                    break;
+                case 6:
+                    System.out.println("exit addressbook");
+                    break;
+            }
+        }
+    }
+    public static void main(String args[]) {
+        Map<String,ContactBook> AddressBookMap = new HashMap<>();
+        System.out.println("###  Welcome to Addressbook System  ###");
+        AddressBookMain addressBookMain = new AddressBookMain();
+        addressBookMain.AddressBook();
+        ContactBook friendsBook=new ContactBook();
+        AddressBookMap.put("friendsBook",friendsBook);
+        ContactBook familyBook = new ContactBook();
+        AddressBookMap.put("familyBook",familyBook);
+           }
+}
+

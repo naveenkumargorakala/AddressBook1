@@ -1,5 +1,5 @@
 package com.bridgelabz.AddressBook;
-
+import java.util.*;
 public class Person {
 
     private String FirstName;
@@ -91,7 +91,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "AddressBook{" +
+        return "Contact{" +
                 "FirstName='" + FirstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 ", Gmail='" + Gmail + '\'' +
