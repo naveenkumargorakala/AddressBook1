@@ -153,6 +153,7 @@ public class AddressBook {
 
     void dispalyContacts() {
         ArrayList<Contact> cDetails = new ArrayList<>();
+        cDetails.stream().sorted();
         for (Contact Person : cDetails) {
             System.out.println(Person);
         }

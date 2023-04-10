@@ -121,7 +121,9 @@ public class AddressBookMain {
                     addressBSMain.Edit();
                     break;
                 case 3:
+
                     addressBSMain.Display();
+
                     break;
                 case 4:
                     addressBSMain.Delete();
@@ -144,6 +146,8 @@ public class AddressBookMain {
         }
         System.out.println("exit");
     }
+
 }
+
 
 
