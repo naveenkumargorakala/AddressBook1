@@ -84,18 +84,20 @@ public class AddressBookMain {
             System.out.println(hashMap);
         }
     }
-    public void searchByCity(){
+
+    public void searchByCity() {
         System.out.println("Enter the Name Of City by Which you want Search");
-        String  cityName = sc.next();
+        String cityName = sc.next();
         List<Contact> cityList = new ArrayList<>();
         hashMap.values().stream().forEach(addressBook -> {
             cityList.addAll(addressBook.getContactBook().stream().filter(Contact ->
                     contact.getCity().equalsIgnoreCase(cityName)).collect(Collectors.toList()));
         });
     }
-    public void searchByState(){
+
+    public void searchByState() {
         System.out.println("Enter the Name Of State by Which you want Search");
-        String  stateName = sc.next();
+        String stateName = sc.next();
         List<Contact> stateList = new ArrayList<>();
         hashMap.values().stream().forEach(addressBook -> {
             stateList.addAll(addressBook.getContactBook().stream().filter(Contact ->
@@ -142,10 +144,6 @@ public class AddressBookMain {
         }
         System.out.println("exit");
     }
-    List<Contact> cityDelhiList = new ArrayList<>();
-
-        addressBookMap.values().stream().forEach(addressBook ->{
-        cityDelhiList.addAll(addressBook.getContactList().
-                stream().filter(contact ->  contact.getCity().equalsIgnoreCase("Kolkata")).collect(Collectors.toList()));
-    });
 }
+
+
