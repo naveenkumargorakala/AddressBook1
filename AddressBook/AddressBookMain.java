@@ -6,7 +6,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AddressBookMain {
-
+    Contact contact = new Contact();
+    Scanner sc = new Scanner(System.in);
     HashMap<String, AddressBook> hashMap = new HashMap<String, AddressBook>();
 
     public void addAddressbook() {
@@ -83,7 +84,26 @@ public class AddressBookMain {
             System.out.println(hashMap);
         }
     }
+    public void searchByCity(){
+        System.out.println("Enter the Name Of City by Which you want Search");
+        String  cityName = sc.next();
+        List<Contact> cityList = new ArrayList<>();
+        hashMap.values().stream().forEach(addressBook -> {
+            cityList.addAll(addressBook.getContactBook().stream().filter(Contact ->
+                    contact.getCity().equalsIgnoreCase(cityName)).collect(Collectors.toList()));
+        });
 
+    }
+    public void searchByState(){
+        System.out.println("Enter the Name Of State by Which you want Search");
+        String  stateName = sc.next();
+        List<Contact> stateList = new ArrayList<>();
+        hashMap.values().stream().forEach(addressBook -> {
+            stateList.addAll(addressBook.getContactBook().stream().filter(Contact ->
+                    contact.getState().equalsIgnoreCase(stateName)).collect(Collectors.toList()));
+        });
+
+    }
 
     public static void main(String[] args) {
         System.out.println("***** Welcome to the Address Based System *****");
@@ -91,7 +111,7 @@ public class AddressBookMain {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while (flag) {
-            System.out.println("1.Add contact\n 2.Edit\n 3.Display\n 4.DeleteContact\n5.displayAllAddressbook \n 6.addAddressbook \n 7.exit");
+            System.out.println("1.Add contact\n 2.Edit\n 3.Display\n 4.DeleteContact\n5.displayAllAddressbook \n 6.addAddressbook \n 7.searchCity \n 8.searchState \n 9.exit");
             int option = sc.nextInt();
             switch (option) {
                 case 1:
@@ -106,12 +126,15 @@ public class AddressBookMain {
                 case 4:
                     addressBSMain.Delete();
                     break;
-
                 case 5:
                     addressBSMain.displayAllAddressbook();
                 case 6:
                     addressBSMain.addAddressbook();
                 case 7:
+                    addressBSMain.searchByCity();
+                case 8:
+                    addressBSMain.searchByState();
+                case 9:
                     flag = false;
                     break;
                 default:
@@ -121,4 +144,10 @@ public class AddressBookMain {
         }
         System.out.println("exit");
     }
+    List<Contact> cityDelhiList = new ArrayList<>();
+
+        addressBookMap.values().stream().forEach(addressBook ->{
+        cityDelhiList.addAll(addressBook.getContactList().
+                stream().filter(contact ->  contact.getCity().equalsIgnoreCase("Kolkata")).collect(Collectors.toList()));
+    });
 }
