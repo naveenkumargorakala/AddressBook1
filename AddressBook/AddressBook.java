@@ -26,7 +26,6 @@ public class AddressBook {
     }
 
     Scanner sc = new Scanner(System.in);
-
     public Contact addDetails() {
         Contact Person = new Contact();
 
@@ -64,14 +63,12 @@ public class AddressBook {
         System.out.println("Create new contact");
         return Person;
     }
-
     public void AddContact() {
         Scanner sc = new Scanner(System.in);
         Contact contactPerson = addDetails();
         cDetails.add(contactPerson);
         System.out.println("Contact added successfully...");
     }
-
 
     public void edit() {
         //edit the person details

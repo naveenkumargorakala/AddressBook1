@@ -92,7 +92,6 @@ public class AddressBookMain {
             cityList.addAll(addressBook.getContactBook().stream().filter(Contact ->
                     contact.getCity().equalsIgnoreCase(cityName)).collect(Collectors.toList()));
         });
-
     }
     public void searchByState(){
         System.out.println("Enter the Name Of State by Which you want Search");
@@ -102,7 +101,6 @@ public class AddressBookMain {
             stateList.addAll(addressBook.getContactBook().stream().filter(Contact ->
                     contact.getState().equalsIgnoreCase(stateName)).collect(Collectors.toList()));
         });
-
     }
 
     public static void main(String[] args) {
