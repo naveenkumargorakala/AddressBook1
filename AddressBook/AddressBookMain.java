@@ -1,4 +1,8 @@
 package com.bridgelabz.AddressBook;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,6 +108,33 @@ public class AddressBookMain {
                     contact.getState().equalsIgnoreCase(stateName)).collect(Collectors.toList()));
         });
     }
+    private void writeToFile() {
+        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
+        StringBuffer addressBookBuffer = new StringBuffer();
+        hashMap.values().stream().forEach(contact -> {
+            String personDataString = contact.toString().concat("\n");
+            addressBookBuffer.append(personDataString);
+        });
+
+        try {
+            Files.write(Paths.get(path), addressBookBuffer.toString().getBytes());
+        }
+        catch (IOException e) {
+            System.out.println("Catch block");
+        }
+    }
+
+    private void readFromFile() {
+        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
+        System.out.println("Reading from : " + path + "\n");
+        try {
+            Files.lines(new File(path).toPath()).forEach(employeeDetails -> System.out.println(employeeDetails));
+        }
+        catch(IOException e){
+            System.out.println("Catch block");
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println("***** Welcome to the Address Based System *****");
@@ -136,12 +167,14 @@ public class AddressBookMain {
                     addressBSMain.searchByCity();
                 case 8:
                     addressBSMain.searchByState();
-                case 9:
-                    flag = false;
+                case 10:
+                    addressBSMain.readFromFile();
+                case 11:
+                    System.out.println("Exit");
                     break;
                 default:
                     System.out.println(option + "Enter s valid option");
-                    break;
+                break;
             }
         }
         System.out.println("exit");
