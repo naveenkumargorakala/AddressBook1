@@ -1,14 +1,25 @@
 package com.bridgelabz.AddressBook;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
+
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-
+import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
 public class AddressBookMain {
     Contact contact = new Contact();
     Scanner sc = new Scanner(System.in);
@@ -108,6 +119,33 @@ public class AddressBookMain {
                     contact.getState().equalsIgnoreCase(stateName)).collect(Collectors.toList()));
         });
     }
+//    private void writeToFile() {
+//        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
+//        StringBuffer addressBookBuffer = new StringBuffer();
+//        hashMap.values().stream().forEach(contact -> {
+//            String personDataString = contact.toString().concat("\n");
+//            addressBookBuffer.append(personDataString);
+//        });
+//
+//        try {
+//            Files.write(Paths.get(path), addressBookBuffer.toString().getBytes());
+//        }
+//        catch (IOException e) {
+//            System.out.println("Catch block");
+//        }
+//    }
+//
+//    private void readFromFile() {
+//        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
+//        System.out.println("Reading from : " + path + "\n");
+//        try {
+//            Files.lines(new File(path).toPath()).forEach(employeeDetails -> System.out.println(employeeDetails));
+//        }
+//        catch(IOException e){
+//            System.out.println("Catch block");
+//        }
+//    }
+
     private void writeToFile() {
         String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
         StringBuffer addressBookBuffer = new StringBuffer();
@@ -125,7 +163,7 @@ public class AddressBookMain {
     }
 
     private void readFromFile() {
-        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
+        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\AddressBook\\contact.csv";
         System.out.println("Reading from : " + path + "\n");
         try {
             Files.lines(new File(path).toPath()).forEach(employeeDetails -> System.out.println(employeeDetails));
@@ -134,8 +172,57 @@ public class AddressBookMain {
             System.out.println("Catch block");
         }
     }
+    private void writetocsv() {
+        String csvPath = "E:\\RFP262Batch\\src\\com\\bridgelabz\\AddressBook\\contact.csv";
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(csvPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<String[]> csvLines = new ArrayList<String[]>();
+        CSVWriter writer = new CSVWriter(fileWriter);
+        String[] header = {"FirstName","LastName","Address","City","State","zip code","phone number","Email"};
+        writer.writeNext(header);
+        hashMap.keySet().stream().forEach(bookName -> hashMap.get(bookName).getContactBook()
+                .stream().forEach(person -> csvLines.add(person.getContactStrings())));
+        writer.writeAll(csvLines);
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void readfromcsv(){
+        // Reading CSV
+        String csvPath ="E:\\RFP262Batch\\src\\com\\bridgelabz\\AddressBook\\contact.csv";
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(csvPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        CSVReader reader = new CSVReaderBuilder(fileReader).build();
+        List<String[]> linesOfData = null;
+        try {
+            linesOfData = reader.readAll();
+        } catch (IOException | CsvException e) {
 
+            e.printStackTrace();
+        }
+        System.out.println("\nReading data from csv file:");
+        linesOfData.stream().forEach(csvs -> {
+            for (String value : csvs)
+                System.out.print(value + "\t");
+            System.out.println();
+        });
+        try {
+            reader.close();
+        } catch (IOException e) {
 
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         System.out.println("***** Welcome to the Address Based System *****");
         AddressBookMain addressBSMain = new AddressBookMain();
