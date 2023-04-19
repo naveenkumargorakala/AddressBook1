@@ -119,33 +119,6 @@ public class AddressBookMain {
                     contact.getState().equalsIgnoreCase(stateName)).collect(Collectors.toList()));
         });
     }
-//    private void writeToFile() {
-//        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
-//        StringBuffer addressBookBuffer = new StringBuffer();
-//        hashMap.values().stream().forEach(contact -> {
-//            String personDataString = contact.toString().concat("\n");
-//            addressBookBuffer.append(personDataString);
-//        });
-//
-//        try {
-//            Files.write(Paths.get(path), addressBookBuffer.toString().getBytes());
-//        }
-//        catch (IOException e) {
-//            System.out.println("Catch block");
-//        }
-//    }
-//
-//    private void readFromFile() {
-//        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
-//        System.out.println("Reading from : " + path + "\n");
-//        try {
-//            Files.lines(new File(path).toPath()).forEach(employeeDetails -> System.out.println(employeeDetails));
-//        }
-//        catch(IOException e){
-//            System.out.println("Catch block");
-//        }
-//    }
-
     private void writeToFile() {
         String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
         StringBuffer addressBookBuffer = new StringBuffer();
@@ -163,7 +136,7 @@ public class AddressBookMain {
     }
 
     private void readFromFile() {
-        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\AddressBook\\contact.csv";
+        String path = "E:\\RFP262Batch\\src\\com\\bridgelabz\\address_book.txt";
         System.out.println("Reading from : " + path + "\n");
         try {
             Files.lines(new File(path).toPath()).forEach(employeeDetails -> System.out.println(employeeDetails));
@@ -172,6 +145,8 @@ public class AddressBookMain {
             System.out.println("Catch block");
         }
     }
+
+
     private void writetocsv() {
         String csvPath = "E:\\RFP262Batch\\src\\com\\bridgelabz\\AddressBook\\contact.csv";
         FileWriter fileWriter = null;
@@ -223,6 +198,29 @@ public class AddressBookMain {
             e.printStackTrace();
         }
     }
+    public <JSONParser> void writefromJson(){
+        JSONArray jsonPersons = new JSONArray();
+        hashMap.keySet().stream().forEach(bookname -> hashMap.get(bookname).getContactBook()
+                .stream().forEach(prsn -> jsonPersons.put((prsn.getContactJSON()))));
+
+        Path jsonPath = Paths.get("D:\\Prathamesh Java\\Day28_AddressBook\\src\\com\\bridgelabz\\addressbook\\AddressBook.jason");
+        try {
+            Files.deleteIfExists(jsonPath);
+            Files.writeString(jsonPath, jsonPersons.toString(), StandardOpenOption.CREATE);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        JSONParser jsonParser = new JSONParser();
+        System.out.println("\nReading data from JSON file:");
+        try {
+            Object object = jsonParser.parse(Files.newBufferedReader(jsonPath));
+            JSONArray personsList = (JSONArray) object;
+            System.out.println(personsList);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         System.out.println("***** Welcome to the Address Based System *****");
         AddressBookMain addressBSMain = new AddressBookMain();
@@ -259,6 +257,13 @@ public class AddressBookMain {
                 case 11:
                     System.out.println("Exit");
                     break;
+                case 12:
+                    addressBSMain.readFromFile();
+                case 13:
+                    addressBSMain.readfromcsv();
+                case 14:
+                    addressBSMain.writefromJson();
+
                 default:
                     System.out.println(option + "Enter s valid option");
                 break;
